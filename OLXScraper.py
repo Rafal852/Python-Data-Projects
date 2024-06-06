@@ -38,11 +38,11 @@ def extract_listing_data(listing):
 def get_detailed_listing_data(url):
     soup = get_soup(url)
     if not soup:
-        return {'czynsz': 'Brak czynszu', 'furnishings': 'Brak umeblowania', 'floor': 'Brak piętra', 'room_number': 'Brak liczby pokoi', 'area': 'Brak powierzchni'}
+        return {'rent': 'Brak rentu', 'furnishings': 'Brak umeblowania', 'floor': 'Brak piętra', 'room_number': 'Brak liczby pokoi', 'area': 'Brak powierzchni'}
 
-    # Extract "czynsz"
-    czynsz_tag = soup.find('p', text=lambda x: x and 'czynsz' in x.lower())
-    czynsz = czynsz_tag.text.strip() if czynsz_tag else 'Brak czynszu'
+    # Extract "rent"
+    rent_tag = soup.find('p', text=lambda x: x and 'rent' in x.lower())
+    rent = rent_tag.text.strip() if rent_tag else 'Brak rentu'
 
     # Extract "umeblowanie" (furnishings)
     furnishings_tag = soup.find('p', text=lambda x: x and 'umeblowanie' in x.lower())
@@ -61,7 +61,7 @@ def get_detailed_listing_data(url):
     area = area_tag.text.strip() if area_tag else 'Brak powierzchni'
 
     return {
-        'czynsz': czynsz,
+        'rent': rent,
         'furnishings': furnishings,
         'floor': floor,
         'room_number': room_number,
@@ -99,7 +99,7 @@ print("Listings Data:", listings_data)
 # Save data to CSV
 csv_file = 'listings.csv'
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
-    fieldnames = ['title', 'price', 'location', 'czynsz', 'furnishings', 'floor', 'room_number', 'area']
+    fieldnames = ['title', 'price', 'location', 'rent', 'furnishings', 'floor', 'room_number', 'area']
     writer = csv.DictWriter(file, fieldnames=fieldnames)
     writer.writeheader()
     for listing in listings_data:
