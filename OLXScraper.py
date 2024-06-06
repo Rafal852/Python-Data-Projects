@@ -42,7 +42,7 @@ def get_detailed_listing_data(url):
 
     # Extract "rent"
     rent_tag = soup.find('p', text=lambda x: x and 'rent' in x.lower())
-    rent = rent_tag.text.strip() if rent_tag else 'Brak rentu'
+    rent = rent_tag.text.strip() if rent_tag else 'Brak czynszu'
 
     # Extract "umeblowanie" (furnishings)
     furnishings_tag = soup.find('p', text=lambda x: x and 'umeblowanie' in x.lower())
